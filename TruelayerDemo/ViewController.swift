@@ -21,11 +21,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openTruelayerAuthDialog() {
-        let baseURL = "https://auth.truelayer.com/"
-        let redirectURI = "https://requestbin.t7r.co/puzrjepv"
+        let baseURL = "https://auth.t7r.co/"
+        let redirectURI = "com.truelayer.truelayerdemo://success"
         let scopes = "offline_access%20info%20accounts%20transactions%20balance"
         let clientID = "test"
-        let url = URL(string: "\(baseURL)?enable_mock=true&response_type=code&response_mode=form_post&client_id=\(clientID)&redirect_uri=\(redirectURI)&scope=\(scopes)&nonce=foo&state=bar");
+        let url = URL(string: "\(baseURL)?enable_mock=true&response_type=code&client_id=\(clientID)&redirect_uri=\(redirectURI)&scope=\(scopes)&nonce=foo&state=bar");
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
 

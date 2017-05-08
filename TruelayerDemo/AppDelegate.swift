@@ -40,7 +40,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let queryItems = url.queryItems
+        if let code = queryItems["code"] {
+            UIAlertView(title: "Code obtained!", message: code, delegate: nil, cancelButtonTitle: nil).show()
+        }
+        
+        return true
+    }
+}
 
-
+extension URL {
+    public var queryItems: [String: String] {
+        var params = [String: String]()
+        return URLComponents(url: self, resolvingAgainstBaseURL: false)?
+            .queryItems?
+            .reduce([:], { (_, item) -> [String: String] in
+                params[item.name] = item.value
+                return params
+            }) ?? [:]
+    }
 }
 
